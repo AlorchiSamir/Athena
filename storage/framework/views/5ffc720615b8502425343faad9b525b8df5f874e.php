@@ -1,0 +1,115 @@
+<?php $__env->startSection('content'); ?>
+    <div class="row">
+        <div class="col-md-8 offset-md-1">
+            <div class="card">
+                <div class="card-header">Ajouter livre</div>
+                <div class="card-body">
+                    <form method="POST" action="<?php echo e(url('admin/book/insert')); ?>" enctype="multipart/form-data" id='book-form'>
+                        <?php echo csrf_field(); ?>
+                        <div class="form-group row">
+                            <label for="title" class="col-md-4 col-form-label text-md-right">Titre</label>
+                            <div class="col-md-6">
+                                <input id="title" type="text" class="form-control" name="title" value="<?php echo e(old('title')); ?>" required autofocus>                                
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="category" class="col-md-4 col-form-label text-md-right">Catégorie</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id='category' name='category'>
+                                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($category->id); ?>">
+                                            <?php echo e($category->name); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+                        </div> 
+
+                        <div class="form-group row">
+                            <label for="category" class="col-md-4 col-form-label text-md-right">Langue d'origine</label>
+                            <div class="col-md-6">
+                                <select class="form-control" id='language' name='language'>
+                                    <?php $__currentLoopData = $languages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $language): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <option value="<?php echo e($language->id); ?>">
+                                            <?php echo e($language->name); ?>
+
+                                        </option>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </select>
+                            </div>
+                        </div> 
+
+                        <div class="form-group row">
+                            <label for="cover" class="col-md-4 col-form-label text-md-right">Couverture</label>
+                            <div class="col-md-6">
+                                <input type="file" id="cover" name="cover" accept="image/*">                                  
+                            </div>
+                        </div>  
+
+                        <div class="form-group row">
+                            <label for="author" class="col-md-4 col-form-label text-md-right">Auteur</label>
+                            <div class="col-md-6">
+                                <input id="author" type="text" class="form-control" name="author" placeholder='Chercher auteur...' autocomplete="off" data-url="<?php echo e(url('author/ajaxList')); ?>" required autofocus>  
+                                <div class='search-result'></div>   
+                                <div class='authors-choice'>                            
+                                </div>                           
+                            </div>
+                        </div> 
+
+                        <div class="form-group row">
+                            <label for="tag" class="col-md-4 col-form-label text-md-right">Tags</label>
+                            <div class="col-md-6">
+                                <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <input type="checkbox" id="tag<?php echo e($tag->id); ?>" name="tag[<?php echo e($tag->id); ?>]">
+                                    <label for="tag<?php echo e($tag->id); ?>"><?php echo e($tag->name); ?></label>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>                                   
+                            </div>
+                        </div>  
+
+                        <div class="form-group row">
+                            <label for="release_date" class="col-md-4 col-form-label text-md-right">Date de sortie</label>
+                            <div class="col-md-6">
+                                <input id="datepicker" type="text" class="form-control" name="release_date" autocomplete="off" value="<?php echo e(old('release_date')); ?>">                                
+                            </div>
+                        </div>                   
+
+                        <div class="form-group row">
+                            <label for="description" class="col-md-4 col-form-label text-md-right">Description</label>
+                            <div class="col-md-6">
+                                <textarea id="description" name="description" class="form-control"><?php echo e(old('description')); ?></textarea>
+                                
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="pages" class="col-md-4 col-form-label text-md-right">Pages</label>
+                            <div class="col-md-6">
+                                <input id="pages" type="number" class="form-control" name="pages" value="<?php echo e(old('pages')); ?>">                                
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="translated" class="col-md-4 col-form-label text-md-right">Traduit ?</label>
+                            <div class="col-md-6">
+                                <input type="checkbox" id="translated" name="translated">
+                            </div>
+                        </div>                         
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Valider
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin.layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp\www\athena\resources\views/admin/books/create.blade.php ENDPATH**/ ?>
